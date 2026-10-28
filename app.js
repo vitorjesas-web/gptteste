@@ -176,7 +176,7 @@ function initializeEnrollment() {
   }
 
   function openWhatsApp() {
-    const message = 'Olá! Quero aproveitar a condição Black do Supletivo EJA Nobel.\n'
+    const message = 'Olá! Quero aproveitar a condição Black do curso Supletivo EJA Nobel.\n'
       + 'Respondi sim às três perguntas e quero agendar minha reunião individual por vídeo para garantir minha matrícula com Super Desconto e Bônus.\n'
       + 'Condição: 12x de R$ 97 no cartão ou R$ 997 à vista.';
     const url = new URL(safeWhatsAppUrl(config.whatsappUrl));
