@@ -10,14 +10,12 @@ const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 let config = { ...DEFAULT_CONFIG };
-let forcedExpiration = false;
 let expirationRendered = false;
-let redirectTimer;
 const dialogOpeners = new WeakMap();
 const openDialogs = new Set();
 
 function isExpired() {
-  return forcedExpiration || config.expired || Date.now() >= new Date(config.campaignEnd).getTime();
+  return config.expired || Date.now() >= new Date(config.campaignEnd).getTime();
 }
 
 function setButtonText(button, text) {
@@ -120,54 +118,14 @@ function showFeedback(element, message, success = false) {
   element.classList.toggle('is-error', !success);
 }
 
-function expiredFeedback(element) {
-  showFeedback(element, 'A condição Black encerrou. ');
-  if (!element) return;
-  const link = document.createElement('a');
-  link.href = './lista-de-espera.html';
-  link.textContent = 'Entrar na lista de espera';
-  element.append(link);
-}
-
-function fieldValue(form, name) {
-  return String(form.elements.namedItem(name)?.value || '').trim();
-}
-
-function validateContactForm(form) {
-  const phone = form.elements.namedItem('whatsapp');
-  if (phone && typeof phone.setCustomValidity === 'function') {
-    let digits = phone.value.replace(/\D/g, '');
-    if ((digits.length === 12 || digits.length === 13) && digits.startsWith('55')) digits = digits.slice(2);
-    phone.setCustomValidity(/^\d{10,11}$/.test(digits) ? '' : 'Informe um WhatsApp com DDD, por exemplo: (75) 99917-0827.');
-  }
-  return form.reportValidity();
-}
-
-function leadBody(form, kind, answers) {
-  const body = {
-    kind,
-    name: fieldValue(form, 'name'),
-    email: fieldValue(form, 'email'),
-    whatsapp: fieldValue(form, 'whatsapp'),
-    city: fieldValue(form, 'city'),
-    consent: form.elements.namedItem('consent')?.checked === true,
-  };
-  if (answers) body.answers = answers;
-  return body;
-}
-
 function initializeEnrollment() {
   const dialog = $('#enrollment-dialog');
   if (!dialog) return;
   const triageForm = $('#triage-form', dialog);
-  const contactForm = $('#lead-form', dialog);
   const questions = $$('[data-question]', dialog);
   const next = $('#triage-next', dialog);
   const back = $('#triage-back', dialog);
-  const feedback = $('#lead-feedback', dialog);
-  const submit = $('#lead-submit', dialog) || $('button[type="submit"]', contactForm || dialog);
   let questionIndex = 0;
-  let submitting = false;
 
   function showView(name) {
     $$('[data-modal-view]', dialog).forEach((view) => {
@@ -206,26 +164,24 @@ function initializeEnrollment() {
     }
     if (next) {
       next.disabled = !checkedAnswer(questionIndex);
-      setButtonText(next, questionIndex === questions.length - 1 ? 'Continuar cadastro' : 'Continuar');
+      setButtonText(next, questionIndex === questions.length - 1 ? 'Ir para o WhatsApp' : 'Continuar');
     }
   }
 
   function reset() {
-    window.clearTimeout(redirectTimer);
     triageForm?.reset();
-    contactForm?.reset();
-    clearFeedback(feedback);
-    contactForm?.querySelectorAll('input').forEach((input) => input.setCustomValidity(''));
     questionIndex = 0;
     renderQuestion();
     showView('triage');
   }
 
-  function readAnswers() {
-    return Object.fromEntries(['adult', 'payment', 'startNow'].map((name) => [
-      name,
-      $(`input[name="${name}"]:checked`, triageForm)?.value === 'yes',
-    ]));
+  function openWhatsApp() {
+    const message = 'Olá! Quero aproveitar a condição Black do Supletivo EJA Nobel.\n'
+      + 'Respondi sim às três perguntas e quero agendar minha reunião individual por vídeo para garantir minha matrícula com Super Desconto e Bônus.\n'
+      + 'Condição: 12x de R$ 97 no cartão ou R$ 997 à vista.';
+    const url = new URL(safeWhatsAppUrl(config.whatsappUrl));
+    url.searchParams.set('text', message);
+    window.location.assign(url.href);
   }
 
   $$('[data-enroll]').forEach((button) => {
@@ -235,7 +191,6 @@ function initializeEnrollment() {
         window.location.assign('./lista-de-espera.html');
         return;
       }
-      if (submitting) return;
       reset();
       openDialog(dialog, button);
       showView('triage');
@@ -265,7 +220,7 @@ function initializeEnrollment() {
         renderQuestion();
         focusElement($('legend, h2, h3, input', questions[questionIndex]));
       } else {
-        showView('contact');
+        openWhatsApp();
       }
     });
     back?.addEventListener('click', () => {
@@ -278,11 +233,6 @@ function initializeEnrollment() {
     renderQuestion();
   }
 
-  contactForm?.addEventListener('input', (event) => {
-    if (typeof event.target.setCustomValidity === 'function') event.target.setCustomValidity('');
-  });
-
-  dialog.addEventListener('close', () => window.clearTimeout(redirectTimer));
 }
 
 function initializeNavigation() {

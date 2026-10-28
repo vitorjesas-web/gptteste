@@ -1,9 +1,12 @@
 # Prévia navegável — Black Nobel
 
 Esta é uma cópia estática para revisão visual, separada da aplicação Node.
-Layout, navegação, vídeos, FAQ, galeria e triagem funcionam. Formulários de
-cadastro e lista de espera estão visíveis, porém desativados com aviso: esta
-hospedagem não executa o servidor nem registra cadastros em CSV.
+Layout, navegação, vídeos, FAQ, galeria e triagem funcionam. Após as três
+respostas positivas, o visitante segue diretamente para o WhatsApp oficial com
+uma mensagem pronta, sem cadastro e sem gravação de lead no site. A mensagem
+só é enviada quando o próprio visitante a confirma no WhatsApp.
+A lista de espera está visível, porém desativada com aviso: esta hospedagem
+não executa o servidor nem registra cadastros em CSV.
 
 Prazo confirmado: 28/11/2026, 23h59 de Brasília.
 WhatsApp confirmado: (75) 99917-0827. Links de contato abrem o canal oficial;
