@@ -5,6 +5,8 @@ Layout, navegação, vídeos, FAQ, galeria e triagem funcionam. Após as três
 respostas positivas, o visitante segue diretamente para o WhatsApp oficial com
 uma mensagem pronta, sem cadastro e sem gravação de lead no site. A mensagem
 só é enviada quando o próprio visitante a confirma no WhatsApp.
+Quem não atende aos critérios recebe um convite para seguir o Instagram
+@supletivoejanobel e acompanhar promoções e novidades.
 A lista de espera está visível, porém desativada com aviso: esta hospedagem
 não executa o servidor nem registra cadastros em CSV.
 
