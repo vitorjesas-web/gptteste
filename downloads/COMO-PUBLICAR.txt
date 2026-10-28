@@ -1,0 +1,102 @@
+PUBLICAR A BLACK NOBEL NO SEU DOMÍNIO
+
+Endereço final: https://nobeleducacao.com/black/
+Arquivo: black-nobel-wordpress.zip
+
+Este pacote é uma página independente em HTML, CSS e JavaScript. Ele será
+colocado ao lado do WordPress, na hospedagem que você já utiliza. Não é um
+tema ou plugin e não deve ser importado no painel do WordPress.
+
+PASSO A PASSO
+
+1. Abra o painel da sua hospedagem e escolha o site nobeleducacao.com.
+
+   Na Hostinger, procure “Gerenciador de arquivos” dentro da área do site.
+   No cPanel, abra “Arquivos” > “Gerenciador de arquivos”.
+   Os nomes dos menus podem variar conforme o painel.
+
+2. Abra a pasta pública desse domínio, normalmente chamada public_html.
+   É a pasta onde estão as pastas wp-admin, wp-content e wp-includes.
+   Se sua conta hospeda vários sites, confirme que está na pasta da Nobel.
+
+3. Confira se já existe uma pasta chamada black.
+
+   Se existir, baixe uma cópia completa dela para guardar como backup antes
+   de substituir qualquer arquivo. Mantenha esse backup no seu computador,
+   fora da pasta pública do site. Guarde também uma cópia da página anterior
+   se o endereço /black/ já era usado por uma página do WordPress.
+
+   Depois de guardar a cópia, substitua a pasta black antiga pela pasta nova
+   completa. Isso evita manter arquivos antigos, como um index.php que possa
+   abrir antes do index.html novo. A troca fica restrita à pasta black.
+
+4. Envie black-nobel-wordpress.zip para public_html usando “Enviar” ou
+   “Upload”. Em seguida, selecione o ZIP e clique em “Extrair”.
+
+   O ZIP já tem a pasta black dentro dele. Portanto, extraia em public_html,
+   e não dentro de outra pasta black. A estrutura correta será:
+
+   public_html/
+     black/
+       index.html
+       styles.css
+       app.js
+       assets/
+       lista-de-espera.html
+       privacidade.html
+       termos.html
+
+   Se aparecer public_html/black/black/index.html, há uma pasta extra.
+   O index.html precisa ficar diretamente dentro da primeira pasta black.
+
+5. Depois de conferir a extração, remova apenas o ZIP enviado de public_html.
+   A pasta black e os arquivos extraídos permanecem no servidor.
+
+6. Abra https://nobeleducacao.com/black/ em uma janela anônima do navegador.
+   Confira também no celular. Se uma versão antiga aparecer, limpe o cache
+   da hospedagem e do navegador e recarregue a página.
+
+7. Faça uma conferência rápida:
+   - Fotos, textos e os cinco pacotes aparecem.
+   - O contador usa 28/11/2026, às 23h59 de Brasília.
+   - A triagem abre pelo botão da Black.
+   - Três respostas “Sim” levam ao WhatsApp (75) 99917-0827 com a mensagem
+     pronta. A mensagem só será enviada se o visitante confirmar no WhatsApp.
+   - Uma resposta “Não” apresenta o Instagram @supletivoejanobel.
+   - Os vídeos abrem, e os links de privacidade e termos funcionam.
+
+   Você pode testar o encaminhamento sem confirmar o envio da mensagem.
+
+COMO ESTA VERSÃO FUNCIONA
+
+A triagem acontece no navegador. A conversa e o agendamento da reunião são
+feitos pelo WhatsApp. Após o prazo da campanha, o botão leva à página de
+interesse para próximas condições, também pelo WhatsApp.
+
+Esta versão para hospedagem WordPress não grava cadastros em banco de dados,
+CSV ou Google Sheets. O atendimento é recebido no WhatsApp. Para armazenar cadastros automaticamente
+em uma planilha, será necessária uma integração adicional real.
+
+Fontes, fotos, logos e capas estão incluídos na pasta assets. Os vídeos são
+carregados dos arquivos originais da Nobel quando o visitante toca em play;
+eles dependem de esses endereços continuarem disponíveis no site original.
+
+DOMÍNIO, HTTPS E DIVULGAÇÃO
+
+O endereço /black/ usa o mesmo domínio e o HTTPS já existentes da Nobel.
+Não é necessário mudar DNS ou contratar outro domínio para esse caminho.
+Este pacote não instala plugins e não contrata serviços adicionais.
+
+Depois de testar, você pode colocar https://nobeleducacao.com/black/ na bio,
+nos anúncios e em um “Link personalizado” do menu do WordPress.
+
+Por estar fora do editor do WordPress, esta página não é adicionada
+automaticamente ao sitemap de um plugin de SEO. Se desejar, solicite a
+indexação do endereço no Google Search Console. Isso não garante prazo ou
+posição nos resultados de busca.
+
+PARA VOLTAR À VERSÃO ANTERIOR
+
+Use a cópia da pasta black que você guardou antes da troca. Substitua somente
+os arquivos dessa pasta. Não altere wp-admin, wp-content, wp-includes ou os
+outros arquivos do site para desfazer esta publicação.
