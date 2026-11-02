@@ -1,17 +1,15 @@
-# Prévia navegável — Black Nobel
+# Black Nobel — teste público
 
-Esta é uma cópia estática para revisão visual, separada da aplicação Node.
-Layout, navegação, vídeos, FAQ, galeria e triagem funcionam. Após as três
-respostas positivas, o visitante segue diretamente para o WhatsApp oficial com
-uma mensagem pronta, sem cadastro e sem gravação de lead no site. A mensagem
-só é enviada quando o próprio visitante a confirma no WhatsApp.
-Quem não atende aos critérios recebe um convite para seguir o Instagram
-@supletivoejanobel e acompanhar promoções e novidades.
-A lista de espera está visível, porém desativada com aviso: esta hospedagem
-não executa o servidor nem registra cadastros em CSV.
+Página estática funcional para teste em endereço independente do domínio próprio.
+Três respostas positivas na triagem abrem o WhatsApp oficial com uma mensagem
+pronta. Resposta negativa apresenta o convite ao Instagram. Depois do prazo,
+a lista de espera é solicitada pelo WhatsApp. Nenhuma mensagem é enviada sem
+a confirmação do visitante no WhatsApp.
 
-Prazo confirmado: 28/11/2026, 23h59 de Brasília.
-WhatsApp confirmado: (75) 99917-0827. Links de contato abrem o canal oficial;
-nenhuma mensagem é enviada automaticamente.
+Esta publicação não requer Node.js nem banco de dados. As fontes, fotos e
+capas são locais. Os vídeos continuam carregados dos endereços públicos
+originais da Nobel em HTTPS. Esta versão não inclui os MP4.
 
-A cópia foi preparada com preparar-preview.py sem alterar a aplicação original.
+Campanha: até 28/11/2026, às 23h59 de Brasília.
+WhatsApp: 5575999170827.
+Instagram: https://www.instagram.com/supletivoejanobel/

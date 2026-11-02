@@ -145,11 +145,3 @@
 }
 /* Red emphasis for the Black Friday headline. */
 .hero h1>span{color:#ff4c58}
-
-/* Static review only. The application's original styles and forms are unchanged. */
-.preview-banner{padding:9px 18px;background:#18181b;color:#fafafa;border-bottom:1px solid #dc2636;text-align:center;font-size:10px;font-weight:600;letter-spacing:.08em;line-height:1.6}
-.preview-form-notice{font-size:12px;line-height:1.8;color:#9f1c26;background:#fff0f1;border:1px solid #f2b8be;border-radius:5px;padding:12px 14px;margin:0 0 20px}
-.preview-disabled-fields{border:0;padding:0;margin:0;opacity:.58;min-width:0}
-.preview-disabled-fields input,.preview-disabled-fields button{cursor:not-allowed}
-.preview-return{margin-top:18px;width:100%;font-size:12px}
-@media(max-width:560px){.preview-banner{font-size:8px;padding:8px 12px;letter-spacing:.04em}}

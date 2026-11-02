@@ -105,19 +105,6 @@ function initializeDialogs() {
   });
 }
 
-function clearFeedback(element) {
-  if (!element) return;
-  element.textContent = '';
-  element.classList.remove('is-error', 'is-success');
-}
-
-function showFeedback(element, message, success = false) {
-  if (!element) return;
-  element.textContent = message;
-  element.classList.toggle('is-success', success);
-  element.classList.toggle('is-error', !success);
-}
-
 function initializeEnrollment() {
   const dialog = $('#enrollment-dialog');
   if (!dialog) return;
@@ -335,14 +322,7 @@ function initializeMedia() {
   });
 }
 
-function initializePreviewForms() {
-  $$('[data-preview-form]').forEach((form) => {
-    form.addEventListener('submit', (event) => { event.preventDefault(); });
-  });
-}
-
 function initialize() {
-  initializePreviewForms();
   initializeDialogs();
   initializeEnrollment();
   initializeNavigation();
