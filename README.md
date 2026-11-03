@@ -1,15 +1,16 @@
 # Black Nobel — teste público
 
 Página estática funcional para teste em endereço independente do domínio próprio.
-Três respostas positivas na triagem abrem o WhatsApp oficial com uma mensagem
-pronta. Resposta negativa apresenta o convite ao Instagram. Depois do prazo,
-a lista de espera é solicitada pelo WhatsApp. Nenhuma mensagem é enviada sem
-a confirmação do visitante no WhatsApp.
+Três respostas positivas abrem o WhatsApp oficial com uma mensagem pronta;
+resposta negativa apresenta o convite ao Instagram. A lista de espera é
+solicitada pelo WhatsApp. Nenhuma mensagem é enviada automaticamente.
 
-Esta publicação não requer Node.js nem banco de dados. As fontes, fotos e
-capas são locais. Os vídeos continuam carregados dos endereços públicos
-originais da Nobel em HTTPS. Esta versão não inclui os MP4.
+Os 9 vídeos adicionais enviados pelo usuário estão incluídos em
+assets/videos/, convertidos para MP4 H.264/AAC, sem cortar o conteúdo.
+Capas reais, fotos, fontes e logos estão incluídos. Os seis depoimentos e a
+apresentação originais continuam nos endereços públicos HTTPS da Nobel.
+Os vídeos carregam somente quando o visitante escolhe assistir.
 
-Campanha: até 28/11/2026, às 23h59 de Brasília.
+Prazo: 28/11/2026, às 23h59 de Brasília.
 WhatsApp: 5575999170827.
 Instagram: https://www.instagram.com/supletivoejanobel/

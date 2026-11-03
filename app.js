@@ -273,24 +273,169 @@ function initializeMedia() {
   const videoDialog = $('#video-dialog');
   const video = $('#modal-video');
   if (videoDialog && video) {
-    $$('[data-video-src]').forEach((button) => {
-      button.addEventListener('click', () => {
-        const title = button.dataset.videoTitle || 'Vídeo da Nobel Educação';
+    const feedback = $('#video-feedback', videoDialog);
+    const retry = $('#video-retry', videoDialog);
+    const directLink = $('#video-direct-link', videoDialog);
+    let source = '';
+    let playbackAttempt = 0;
+    let loadingTimer;
+    let needsInteraction = false;
+    let failed = false;
+
+    function active() {
+      return videoDialog.open && Boolean(source);
+    }
+
+    function showVideoFeedback(message = '', state = 'notice') {
+      if (feedback) {
+        feedback.textContent = message;
+        feedback.hidden = !message;
+        feedback.dataset.state = state;
+        feedback.classList.toggle('is-error', state === 'error');
+      }
+      video.setAttribute('aria-busy', String(state === 'loading'));
+    }
+
+    function showRetry(show, label = 'Tentar novamente') {
+      if (!retry) return;
+      retry.hidden = !show;
+      retry.textContent = label;
+    }
+
+    function waitForVideo() {
+      window.clearTimeout(loadingTimer);
+      loadingTimer = window.setTimeout(() => {
+        if (!active() || failed || needsInteraction || video.readyState >= 3) return;
+        showVideoFeedback('O carregamento está demorando. Aguarde mais um pouco ou abra o vídeo diretamente.');
+        showRetry(true);
+      }, 12000);
+    }
+
+    function showVideoError(error) {
+      window.clearTimeout(loadingTimer);
+      failed = true;
+      const code = video.error?.code;
+      const message = code === 3 || code === 4 || error?.name === 'NotSupportedError'
+        ? 'Este navegador não conseguiu reproduzir o vídeo. Tente novamente ou abra o arquivo diretamente.'
+        : 'Não foi possível carregar o vídeo. Confira sua conexão, tente novamente ou abra o arquivo diretamente.';
+      showVideoFeedback(message, 'error');
+      showRetry(true);
+    }
+
+    function playVideo(reload = false) {
+      if (!active()) return;
+      const attempt = ++playbackAttempt;
+      needsInteraction = false;
+      failed = false;
+      showRetry(false);
+      showVideoFeedback('Carregando vídeo…', 'loading');
+      if (reload) video.load();
+      waitForVideo();
+
+      function onPlayFailure(error) {
+        // Closing or replacing a source intentionally aborts its pending play().
+        if (attempt !== playbackAttempt || !active()) return;
+        window.clearTimeout(loadingTimer);
+        if (error?.name === 'NotAllowedError') {
+          needsInteraction = true;
+          showVideoFeedback('Toque em “Reproduzir vídeo” ou no controle de reprodução do player para assistir. Você também pode abrir o vídeo diretamente.');
+          showRetry(true, 'Reproduzir vídeo');
+        } else {
+          showVideoError(error);
+        }
+      }
+
+      try {
+        const playing = video.play();
+        if (playing?.catch) playing.catch(onPlayFailure);
+      } catch (error) {
+        onPlayFailure(error);
+      }
+    }
+
+    $$('[data-video-src]').forEach((trigger) => {
+      trigger.addEventListener('click', (event) => {
+        const isLink = trigger.tagName === 'A';
+        if (event.defaultPrevented || (isLink && (event.button !== 0
+          || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey))) return;
+
+        let url;
+        try {
+          url = new URL(trigger.dataset.videoSrc || trigger.getAttribute('href'), document.baseURI);
+          if (!['https:', 'http:', 'file:'].includes(url.protocol)) return;
+        } catch {
+          return;
+        }
+
+        try {
+          if (typeof videoDialog.showModal !== 'function') throw new Error('Dialog unavailable');
+          openDialog(videoDialog, trigger);
+        } catch {
+          if (!isLink) window.location.assign(url.href);
+          return;
+        }
+        // A normal link still works without JavaScript or native dialog support.
+        event.preventDefault();
+        ++playbackAttempt;
+        video.pause();
+        source = url.href;
+        const title = trigger.dataset.videoTitle || 'Vídeo da Nobel Educação';
         const titleElement = $('#video-title', videoDialog);
         if (titleElement) titleElement.textContent = title;
-        video.poster = button.dataset.videoPoster || '';
-        video.src = button.dataset.videoSrc;
+        video.controls = true;
+        video.preload = 'metadata';
+        video.poster = trigger.dataset.videoPoster || '';
+        video.src = source;
         video.title = title;
-        openDialog(videoDialog, button);
-        video.load();
-        const playing = video.play();
-        if (playing?.catch) playing.catch(() => { /* Native controls remain available. */ });
+        if (directLink) {
+          directLink.href = source;
+          directLink.hidden = false;
+        }
+        playVideo(true);
+      });
+    });
+
+    retry?.addEventListener('click', () => playVideo(failed || Boolean(video.error)));
+    video.addEventListener('error', () => {
+      if (active() && video.error) showVideoError();
+    });
+    video.addEventListener('playing', () => {
+      if (!active()) return;
+      window.clearTimeout(loadingTimer);
+      failed = false;
+      needsInteraction = false;
+      showVideoFeedback();
+      showRetry(false);
+    });
+    video.addEventListener('canplay', () => {
+      if (!active() || failed || needsInteraction) return;
+      window.clearTimeout(loadingTimer);
+      showVideoFeedback(video.paused ? 'Vídeo pronto. Use o controle de reprodução para assistir.' : '');
+    });
+    ['waiting', 'stalled'].forEach((eventName) => {
+      video.addEventListener(eventName, () => {
+        if (!active() || failed || needsInteraction) return;
+        showVideoFeedback('O vídeo está carregando. Você também pode abrir o arquivo diretamente.', 'loading');
+        waitForVideo();
       });
     });
     videoDialog.addEventListener('close', () => {
+      // A queued close event may belong to a dialog that has already reopened.
+      if (videoDialog.open) return;
+      ++playbackAttempt;
+      source = '';
+      window.clearTimeout(loadingTimer);
       video.pause();
       video.removeAttribute('src');
+      video.removeAttribute('poster');
+      video.preload = 'none';
       video.load();
+      showVideoFeedback();
+      showRetry(false);
+      if (directLink) {
+        directLink.hidden = true;
+        directLink.removeAttribute('href');
+      }
     });
   }
 
