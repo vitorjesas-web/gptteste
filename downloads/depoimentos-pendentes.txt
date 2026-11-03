@@ -1,0 +1,14 @@
+DEPOIMENTOS QUE AINDA PRECISAM DE UMA VERSÃO MENOR
+
+Os nove arquivos que puderam ser transferidos já foram incorporados à página.
+Os quatro arquivos abaixo ultrapassam o limite de transferência de 32 MiB
+por arquivo deste ambiente e ainda não puderam ser incorporados:
+
+1. copy_22B300D0-13DA-4BBA-A914-BD7E45706B19.MOV
+2. 958900542500456fb2bddc9e37ecfa73.MOV
+3. copy_25069889-89E8-4914-B3C2-F09D8908A32F.MOV
+4. copy_8C5F446A-64B1-4EA9-AC62-F12125020652.MOV
+
+Para completar a inclusão, envie versões MP4 desses arquivos com menos
+de 32 MB cada. A duração pode ser preservada; basta reduzir o tamanho na
+exportação, por exemplo usando H.264 com áudio AAC.

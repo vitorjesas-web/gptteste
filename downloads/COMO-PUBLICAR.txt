@@ -77,9 +77,17 @@ Esta versão para hospedagem WordPress não grava cadastros em banco de dados,
 CSV ou Google Sheets. O atendimento é recebido no WhatsApp. Para armazenar cadastros automaticamente
 em uma planilha, será necessária uma integração adicional real.
 
-Fontes, fotos, logos e capas estão incluídos na pasta assets. Os vídeos são
-carregados dos arquivos originais da Nobel quando o visitante toca em play;
-eles dependem de esses endereços continuarem disponíveis no site original.
+Fontes, fotos, logos e capas estão incluídos na pasta assets. A página tem
+15 depoimentos: nove enviados pelo usuário estão incluídos como MP4 locais
+em assets/videos, com suas capas; os outros seis depoimentos e a apresentação
+da escola continuam nos arquivos remotos originais da Nobel (sete vídeos
+externos). Os vídeos carregam quando o visitante toca em play.
+
+Os nove MP4 locais usam H.264/AAC com faststart, sem cortes, e seus cards são
+numerados sem atribuir nomes ou cidades. Eles não dependem de links de vídeo
+externos. Os sete remotos continuam dependendo da disponibilidade dos seus
+endereços originais; a inclusão dos locais não confirma a resolução de uma
+falha externa. Os cinco pacotes profissionalizantes permanecem na página.
 
 DOMÍNIO, HTTPS E DIVULGAÇÃO
 

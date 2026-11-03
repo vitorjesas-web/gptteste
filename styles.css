@@ -146,6 +146,16 @@
 /* Red emphasis for the Black Friday headline. */
 .hero h1>span{color:#ff4c58}
 
+/* Uploaded testimonials keep real frames and load only when selected. */
+.story-card[data-local-testimonial] img{object-position:center 20%}
+.video-dialog video{max-height:calc(100vh - 230px);max-height:calc(100dvh - 230px);object-fit:contain}
+.video-dialog-footer{padding:10px 18px 16px;display:grid;gap:8px}
+.video-feedback{font-size:13px;line-height:1.6;color:#f5f5f7}
+.video-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.video-direct-link{display:inline-flex;align-items:center;min-height:44px;padding:8px 0;font-size:13px;color:var(--gold-light);text-decoration:underline;text-underline-offset:4px}
+.video-dialog .button-outline{border-color:#ffffff66;color:white;background:transparent;min-height:44px;padding:10px 16px;font-size:13px}
+.video-dialog .button-outline:hover{background:#ffffff16}
+
 /* Static review only. The application's original styles and forms are unchanged. */
 .preview-banner{padding:9px 18px;background:#18181b;color:#fafafa;border-bottom:1px solid #dc2636;text-align:center;font-size:10px;font-weight:600;letter-spacing:.08em;line-height:1.6}
 .preview-form-notice{font-size:12px;line-height:1.8;color:#9f1c26;background:#fff0f1;border:1px solid #f2b8be;border-radius:5px;padding:12px 14px;margin:0 0 20px}
